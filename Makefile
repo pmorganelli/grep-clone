@@ -1,7 +1,13 @@
 ###
 ### Makefile for Gerp Project
 ###
-### Author:  YOUR NAME HERE
+### Authors: Peter Morganelli and Brendan Roy
+
+
+CXX      = clang++
+CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
+LDFLAGS  = -g3 
+
 
 ## 
 ## Build up your Makefile in a similar manner as for Zap. Feel free 
@@ -11,6 +17,9 @@
 ## 
 ## At the end, you can delete this comment!
 ## 
+
+gerp: FSTree.o DirNode.o
+	${CXX} ${CXXFLAGS} $^ -o $@
 
 ##
 ## Here is a special rule that removes all .o files besides the provided ones 

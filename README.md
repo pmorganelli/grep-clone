@@ -25,13 +25,9 @@
 
 **F. Architectural Overview:**
 
-
-
-
 **G: ADT and Data Structures:** 
 
     Interesting Algorithms:
-
 
 **H. Testing:**
 
