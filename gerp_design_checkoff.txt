@@ -1,5 +1,5 @@
-Names:
-utlns:
+Names: Peter Morganelli and Brendan Roy
+utlns: pmorga01 broy02
 
 Answer the questions below, and submit your answers under the assignment
 "gerp Design Checkoff" on Gradescope. You must sign up for a design checkoff

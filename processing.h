@@ -11,4 +11,4 @@ using namespace std;
 string stripNonAlphaNum(string input);
 void traverseDirectory(string directory);
 
-#endif 
+#endif

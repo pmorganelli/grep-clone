@@ -1,12 +1,12 @@
 ###
 ### Makefile for Gerp Project
-###
+### April 11, 2024
 ### Authors: Peter Morganelli and Brendan Roy
 
 
 CXX      = clang++
 CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
-LDFLAGS  = -g3 
+LDFLAGS  = -g3 -O2
 
 
 ## 
