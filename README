@@ -3,7 +3,7 @@
 * CS 15
 * README
 * Authors: Peter Morganelli pmorga01 and Brendan Roy broy02
-* April 10th 2024
+* April 14th 2024
 **********************************************************/
 
 **B. Program Purpose:**
@@ -21,7 +21,7 @@
      - Compile using
             make gerp
      - run executable with
-            ./gerp
+            ./gerp DirectoryToIndex OutputFile
 
 **F. Architectural Overview:**
 
@@ -33,3 +33,4 @@
 
 
 **I. Time Spent Log:** 
+4 hours

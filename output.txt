@@ -1,0 +1,91 @@
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/4/1/8/14184/14184.txt:181: q
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/4/0/2/14022/14022.txt:1518: q credit to mi frinde, in time did stande me most in hande, so wolde I
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/4/2/3/14230/14230.txt:685: _e o, e p, e q_. 3rdly. Now the position of this dial being such that
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/4/2/3/14230/14230.txt:692: to 1. Take also _h p_ and set it from 12 to 2, _h q_ being equal to _b
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/4/2/3/14230/14230.txt:695: the shadow of the corner _i_ will appear on the side _h g_ at _q_ or 3
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14640/14640.txt:155: D    d      Q   q
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14640/14640.txt:178: j  k  l  m  n  o  p  q
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14642/14642.txt:122: q r s t
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14642/14642.txt:1191: q  u  o   quo
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14642/14642.txt:1218: i  j  k  l  m  n  o  p  q
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/1/0/6/11065/11065.txt:100:       O o   P p   Q q   R r   S s
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/1/0/6/11065/11065.txt:109:    _q  o  f  m  e  g  v  p  a  h  n
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/1/0/7/11073/11073.txt:311: Q q
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/9/1/6/19169/19169.txt:63: o p q r s t u
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/9/3/1/19319/19319.txt:162: _q q q q_, &c.
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/0/7/4/10742/10742.txt:52: l m n o p q r s t u v
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/0/7/4/10742/10742.txt:92: Q [Illustration: Quail.] q
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/0/9/6/10965/10965.txt:70:     a b e d e f g h i j k l m n o p q r
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/0/9/6/10965/10965.txt:80:    _a b e d e f g h i j k l m n o p q r
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/0/8/3/10834/10834.txt:71: a b c d e f g h i j k l m n o p q r s t u v w x y z.
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/0/8/3/10834/10834.txt:79: _a b c d e f g h i j k l m n o p q r s t u v w x y z_.
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/6/4/3/16432/16432.txt:36: characters of English, but with "q", "w", "x", and "y" removed, and
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/8/1/1/18119/18119.txt:260: first, rather than final y and s; q is taught with the u--qu (as in
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/8/1/1/18119/18119.txt:261: quiet, queer, quick) not q alone.
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/8/9/3/18937/18937.txt:92:   P p   Q q
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/3/7/4/13747/13747.txt:1418:       Un beau present q vo' envoy,
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/3/0/1/13014/13014.txt:501:      f. v. k. c. q. d. t. b. p.
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/3/0/1/13014/13014.txt:526: _explosive_, as _k. c. q. t. d. b. p._
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/3/0/1/13014/13014.txt:715: and by breaking out, maketh _k. c._ or _q._ which in _Germany_ are all
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/3/8/5/13853/13853-0.txt:175: [Script: Q q]
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/3/8/5/13853/13853-0.txt:176: Q q
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/3/6/4/13647/13647.txt:1955:             q!
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/3/6/4/13647/13647.txt:2323:             q
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/3/6/4/13647/13647.txt:2704:             q!
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/5/0/9/15097/15097.txt:123: Q q         Q q         cue
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/5/0/9/15097/15097-0.txt:123: Q q         Q q         cue
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/2/9/0/12905/12905.txt:648: rascals have it, though they _have_ run up as high as thirty q----,
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/2/8/1/12815/12815.txt:911: sugar, butter, cinnamon, mace, wine or rose-water q: s:
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/2/8/1/12815/12815.txt:929: 6 ounces butter, wine, sugar and spices, q: s: bake 2 hours.
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/2/8/1/12815/12815.txt:955: 4 ounces butter, sugar or molasses and spice q. f. it will require two
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/2/8/1/12815/12815.txt:1130: into two pound of flour, wet with four whites well beaten; water q: s:
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/2/8/1/12815/12815.txt:1308: raisins, q: s:
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/2/7/17273/17273.txt:190:   [Sidenote q: _Psal._ 84. 6.]
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/2/7/17273/17273.txt:1241:   Sidenote fq [simple "q" in original]
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/2/7/17273/17273.txt:1242:     _text has "p" for "q", but reference in body text is correct_]
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/0/1/17016/17016.txt:1453: XIV Never separate _q_ from _u_, _qu_ is a single sound.
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/0/0/17000/17000-0.txt:467: Thei are in nu_m_ber 23: a, b, c, d, e, f, g, h, i, k, l, m, n, o, p, q,
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/0/0/17000/17000-0.txt:668: c, g, k, j, q, and x, and so we have 18 consonantes borrowed of the
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/0/0/17000/17000-0.txt:814: symboles of c, g, k and q, that they be al symboles, but of one sound;
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/0/0/17000/17000-0.txt:828: j, k, l, m, n, o, oa, oo, ou, p, q, r, s, t, u, ui, v, w, x, y, z, and
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/0/0/17000/17000-0.txt:926: symbolized with q or w, a hoat disputation betuene him and me. After
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/0/0/17000/17000.txt:477: Thei are in nu_m_ber 23: a, b, c, d, e, f, g, h, i, k, l, m, n, o, p, q,
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/0/0/17000/17000.txt:678: c, g, k, j, q, and x, and so we have 18 consonantes borrowed of the
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/0/0/17000/17000.txt:827: symboles of c, g, k and q, that they be al symboles, but of one sound;
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/0/0/17000/17000.txt:841: j, k, l, m, n, o, oa, oo, ou, p, q, r, s, t, u, ui, v, w, x, y, z, and
+test-dirs/largeGutenberg/www.gutenberg.lib.md.us/1/7/0/0/17000/17000.txt:939: symbolized with q or w, a hoat disputation betuene him and me. After
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/0/9/6/10965/10965.txt:70:     a b e d e f g h i j k l m n o p q r
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/0/9/6/10965/10965.txt:80:    _a b e d e f g h i j k l m n o p q r
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/0/8/3/10834/10834.txt:71: a b c d e f g h i j k l m n o p q r s t u v w x y z.
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/0/8/3/10834/10834.txt:79: _a b c d e f g h i j k l m n o p q r s t u v w x y z_.
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/0/7/4/10742/10742.txt:52: l m n o p q r s t u v
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/0/7/4/10742/10742.txt:92: Q [Illustration: Quail.] q
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/1/0/6/11065/11065.txt:100:       O o   P p   Q q   R r   S s
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/1/0/6/11065/11065.txt:109:    _q  o  f  m  e  g  v  p  a  h  n
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/1/0/7/11073/11073.txt:311: Q q
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/9/1/6/19169/19169.txt:63: o p q r s t u
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/8/9/3/18937/18937.txt:92:   P p   Q q
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/2/9/0/12905/12905.txt:648: rascals have it, though they _have_ run up as high as thirty q----,
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/4/1/8/14184/14184.txt:181: q
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14640/14640.txt:155: D    d      Q   q
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14640/14640.txt:178: j  k  l  m  n  o  p  q
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14642/14642.txt:122: q r s t
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14642/14642.txt:1191: q  u  o   quo
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14642/14642.txt:1218: i  j  k  l  m  n  o  p  q
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/3/8/5/13853/13853-0.txt:175: [Script: Q q]
+test-dirs/mediumGutenberg/www.gutenberg.lib.md.us/1/3/8/5/13853/13853-0.txt:176: Q q
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/8/9/3/18937/18937.txt:92:   P p   Q q
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/9/1/6/19169/19169.txt:63: o p q r s t u
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14642/14642.txt:122: q r s t
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14642/14642.txt:1191: q  u  o   quo
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/4/6/4/14642/14642.txt:1218: i  j  k  l  m  n  o  p  q
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/4/1/8/14184/14184.txt:181: q
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/0/7/4/10742/10742.txt:52: l m n o p q r s t u v
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/0/7/4/10742/10742.txt:92: Q [Illustration: Quail.] q
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/0/8/3/10834/10834.txt:71: a b c d e f g h i j k l m n o p q r s t u v w x y z.
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/0/8/3/10834/10834.txt:79: _a b c d e f g h i j k l m n o p q r s t u v w x y z_.
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/0/9/6/10965/10965.txt:70:     a b e d e f g h i j k l m n o p q r
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/0/9/6/10965/10965.txt:80:    _a b e d e f g h i j k l m n o p q r
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/1/0/7/11073/11073.txt:311: Q q
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/1/0/6/11065/11065.txt:100:       O o   P p   Q q   R r   S s
+test-dirs/smallGutenberg/www.gutenberg.lib.md.us/1/1/0/6/11065/11065.txt:109:    _q  o  f  m  e  g  v  p  a  h  n

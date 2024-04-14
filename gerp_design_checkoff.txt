@@ -1,5 +1,5 @@
 Names: Peter Morganelli and Brendan Roy
-utlns: pmorga01 broy02
+utlns: pmorga01 and broy02
 
 Answer the questions below, and submit your answers under the assignment
 "gerp Design Checkoff" on Gradescope. You must sign up for a design checkoff
@@ -8,17 +8,33 @@ Make sure to submit this file *prior* to your design checkoff.
 
 For each question, give as much detail as you feel is necessary.
 
-1. What classes and structs will you implement for your program? For each class,
-   provide a list of public functions of that class; for each struct, provide a
-   list of member variables.
+1. What classes and structs will you implement for your program? For each 
+   class, provide a list of public functions of that class; for each struct, 
+   provide a list of member variables.
 
-Answer:
+Answer:    
+   -Classes:
+      -Class for hashing
+         add(string word), get(string word)
+      -string parsing functions
+      -gerp.cpp will create a
+         run()            
+      -hash table index struct/class
+         hash #, vector<string> word, bool empty, vector<string> files
+      -#include <functional> to use hash tables
         
 2. Describe the index that you will build for querying. What specific data
    structures will you use to build this index? *Important*: Bring an
    accompanying drawing of your index structure when you come to your checkoff.
 
-Answer:
+Answer: We will use a vector to build our hash table index. Using the size (the 
+number of non-empty indices) and capacity (the size() of the vector), we can 
+determine the load factor and use linear probing to deal with collisions.
+
+vector:
+load factor: .7
+int size
+int capacity
 
 3. To use your index, you will use something for lookup (the key) and you will
    get some associated data back (the value). What are the C++ *types* of your
@@ -28,65 +44,106 @@ Answer:
    define a struct/class named Animal. If your key/value types involve custom
    classes/structs, they should be included in your answer to question #1.
                 
-Answer:
+Answer: 
 
-   Key type:
-   Value type:         
+   Key type: String
+   Value type: Int         
 
 4. Explain what a collision is versus having multiple lines associated with 
    a particular word. Write (and/or draw) out an example of when a 
    collision occurs. Write (and/or draw) out an example of when multiple 
    lines associated with a single word. 
 
-Answer:
+Answer: A collision is when two words' hash functions return the same index. 
+        For example, "happy" and "dog" might both lead to index 39 
+        (after modding by the table's capacity), and we would then use linear 
+        probing to find the appropriate index for the word "dog." In our hash
+        index we use a vector files to store the names of the files
 
 5. What do you expect the *space* complexity of your index will be? How many
    times will a single line be stored according to your data structures?
 
-Answer:
+Answer: We expect the space complexity of our index to be O(n) and we expect
+        a single line to be stored one single time according to our data
+        structure.
 
 6. What is the time complexity of *building* your index? If you refer to some
    variable, be sure to specify what the variable refers to, e.g., in "O(n)",
    state explicitly what "n" is.
 
-Answer:
+Answer: O(n) with n being the total number of words across all files in the
+        directory
                 
 7. What is the time complexity of *using* your index for lookup? As above,
    be specific about variables you use.
 
-Answer:
+Answer: It will have O(1) on average time complexity for using our hash table 
+and O(n) worst case where n is the size of the hash table.
 
 8. How will you handle case-sensitive search?
    What is the time complexity (should be close to O(1))?
+
+find 'WALNUT' in /cs15/gerp
+
+
+
+walnut 
+Walnut
+WALNUT
+
+string theWord = WALNUT;
+hash(theWord.LOWERCASE()); = walnut
+hash[idx] = WALNUT
 
 Answer:
 
 9. How will you handle case-insensitive search?
    What is the time complexity (should be close to O(1))?
 
+Walnut
+walnut
+WALNUT
+
+all these get stored at the "walnut" hash index
+In that index, we have a vector of linked lists (front = version of string) of 
+strings containing the file names and the line numbers
+
 Answer:
 
-10. How are you handling duplicate words within a line? Consider these two example 
-   lines: 
+10. How are you handling duplicate words within a line? Consider these two
+    example lines: 
 
-      (i) the cat and the dog 
+      (i) the cat and the dog
       (ii) the cat and THE dog 
 
-   If a user does a case sensitive query on line (i) it should report 'the' only 
-   once by showing the line only once in the output. How will you do this? 
+   If a user does a case sensitive query on line (i) it should report 'the' 
+   only once by showing the line only once in the output. How will you do this? 
 
    If a user does a case insensitive query on line (ii) it should report 'the' 
    only once by showing the line only once in the output. How will you do this? 
 
-Answer:
+   If the version of the word is already 
+
+   the - cs15/hw04/README/line 28
+   The - cs 15/hw04/README/line 28
+
+Answer: If the instance of the word we are 
 
 11. How will you test your implementation and what specific evidence of testing
     will you submit?
 
-Answer:
+Answer: We will use unit testing for part 1 of the project along with some of
+        part 2 but will also rely on input files and comparing different
+        outputs against the reference program to ensure accuracy of our
+        implementation.
 
-12. What is your schedule for completing this assignment? Include specific dates
-    and the tasks that you would like to accomplish by each date. Do not forget
-    testing!
+12. What is your schedule for completing this assignment? Include specific 
+    dates and the tasks that you would like to accomplish by each date. Do not 
+    forget testing!
 
-Answer: 
+Answer: we will complete part 1 with testing and everything on Tuesday night.
+        Then, we will do as much as we can on Wednesday / Thursday of this 
+        week. We will be testing throughout. We are then planning on working 
+        on it intermittently and completing it in the following week. We will 
+        then finish the project's main portion by the 24th, which leaves us 
+        some time for edge cases and documentation.
