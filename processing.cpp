@@ -11,10 +11,7 @@
 */
 
 #include "processing.h"
-#include "DirNode.h"
-#include "FSTree.h"
 
-#include <iostream>
 
 /*
 * name:      stripNonAlphaNum
@@ -50,37 +47,44 @@ string stripNonAlphaNum(string input){
 * effects:   prints all the file paths to cout
 */
 void traverseDirectory(string directory){
+    // create tree then pass it into helper function
     FSTree d(directory);
     DirNode *root = d.getRoot();
-    if(d.isEmpty()){
-        cout << "hi";
-        return;
-    }
+    traverseDirectoryHelper(root);    
+}
 
-    //TODO: modularize code below
-    if(root->hasFiles()){
+/*
+* name:      traverseDirectoryHelper
+* purpose:   to traverse the directory given an FSTree and output each file           
+* arguments: a pointer to the root of the tree to traverse
+* returns:   none; it is void
+* effects:   prints out every file in given directory + subdirectory
+*/
+void traverseDirectoryHelper(DirNode *root){
+    if(root->hasFiles()){ // print all files in the directory
         int numFilesCount = root->numFiles();
         for(int i = 0; i < numFilesCount; i++){
-            cout << directory << "/" << root->getFile(i) << endl;
+            cout << retrieveParents(root) << "/" << root->getFile(i) << endl;
         }
     }
-    if(root->hasSubDir()){
-        int subDirsCount = root->numSubDirs();
-        for(int i = 0; i < subDirsCount; i++){
-            traverseDirectory(root->getSubDir(i)->getName());
-            // DirNode *newNode = root->getSubDir(i);
-            // root->setParent(newNode);
-            // DirNode *newRoot = d.getRoot();
+
+    if(root->hasSubDir()){ // run traverseDirectoryHelper on each subdirectory
+        for(int i = 0; i < root->numSubDirs(); i++){
+            traverseDirectoryHelper(root->getSubDir(i));
         }
-    } else {
-        return;
     }
-
-    // cout << directory << "/";
-
 }
 
-void traverseDirectoryHelper(){
-    
+/*
+* name:      retrieveParents
+* purpose:   get all the parents of a given subdirectory node
+* arguments: pointer to a DirNode whose parents we want to return
+* returns:   a string of all the DirNode's parents 
+* effects:   none
+*/
+string retrieveParents(DirNode *root){
+    if (root->getParent() != nullptr){
+        return retrieveParents(root->getParent()) + "/" + root->getName();
+    }
+    else return root->getName();
 }
-

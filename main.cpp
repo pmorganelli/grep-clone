@@ -18,6 +18,7 @@
 
 #include "hashtable.h"
 #include "processing.h"
+#include "gerp.h"
 using namespace std;
 
 
@@ -27,18 +28,15 @@ int main(int argc, char *argv[]){
         return EXIT_FAILURE;
     }
 
-    (void) argc;
-    (void) argv;
-
-    HashTable h;
-    h.run(argv[1], argv[2]);
+    Gerp g;
+    g.run(argv[1], argv[2]);
     
     return 0;
 }
 
 
 
-// /*
+// /*g
 // * name:      open_or_die_input
 // * purpose:   to open a given input file
 // * arguments: the name of the file as a string

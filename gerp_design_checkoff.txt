@@ -46,8 +46,8 @@ int capacity
                 
 Answer: 
 
-   Key type: String
-   Value type: Int         
+   Key type: int
+   Value type: String (or a vector of linked lists of strings)         
 
 4. Explain what a collision is versus having multiple lines associated with 
    a particular word. Write (and/or draw) out an example of when a 
@@ -58,7 +58,7 @@ Answer: A collision is when two words' hash functions return the same index.
         For example, "happy" and "dog" might both lead to index 39 
         (after modding by the table's capacity), and we would then use linear 
         probing to find the appropriate index for the word "dog." In our hash
-        index we use a vector files to store the names of the files
+        index we use a linked list of strings to names of the files
 
 5. What do you expect the *space* complexity of your index will be? How many
    times will a single line be stored according to your data structures?
@@ -85,8 +85,6 @@ and O(n) worst case where n is the size of the hash table.
 
 find 'WALNUT' in /cs15/gerp
 
-
-
 walnut 
 Walnut
 WALNUT
@@ -95,7 +93,12 @@ string theWord = WALNUT;
 hash(theWord.LOWERCASE()); = walnut
 hash[idx] = WALNUT
 
-Answer:
+Answer: We will first hash the lowercase version of the word, then add its 
+case sensitive version as a linked list to our vector that is a part of each
+hash table's index. Then, we would add all of that case sensitive's instances
+in files to the back of its linked list. When searching for a case sensitive
+word, we will get to its index in O(1) time by hashing its lowercase version,
+then finding its corresponding linked list and printing out its contents.
 
 9. How will you handle case-insensitive search?
    What is the time complexity (should be close to O(1))?
@@ -106,7 +109,10 @@ WALNUT
 
 all these get stored at the "walnut" hash index
 In that index, we have a vector of linked lists (front = version of string) of 
-strings containing the file names and the line numbers
+strings containing the file names and the line numbers. Thus, for case
+insensitive search, we can simply print out every single line in every single
+linked list at that hash index.
+
 
 Answer:
 
@@ -126,6 +132,12 @@ Answer:
 
    the - cs15/hw04/README/line 28
    The - cs 15/hw04/README/line 28
+
+struct of line # storing the filename, #, and a bool representing if we already
+have that number or not. Then, we could just print out all the false ones??
+
+or we could make a list (or vector) of every unique line instance of the word.
+tbh i am not 100% sure how we can do this.
 
 Answer: If the instance of the word we are 
 

@@ -11,20 +11,32 @@
 */
 
 
-#ifndef GERP_H_
-#define GERP_H_
+#ifndef _GERP_H_
+#define _GERP_H_
 
 #include <string>
 #include <fstream>
+#include <iostream>
 
 using namespace std;
+
+struct Word{
+
+};
+
+struct Line{
+    bool seen = false;
+};
 
 class Gerp{
     public:
         void run(string directory, string outputFile);
-        ofstream open_or_die_output(string filename);
+        
 
     private:
+        template<typename streamtype>
+        void open_or_die(streamtype &stream, string filename);
+        void quit();
 };
 
 

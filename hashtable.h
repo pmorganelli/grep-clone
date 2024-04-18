@@ -10,32 +10,54 @@
  *  
  *
 */
-#ifndef HASHTABLE_H_
-#define HASHTABLE_H_
+#ifndef _HASHTABLE_H_
+#define _HASHTABLE_H_
 
 #include <string>
+#include <iostream>
 #include <fstream>
+#include <vector>
+#include <list>
+#include <utility>
+#include <functional>
+
 using namespace std;
 
-struct Word{
 
-};
 
 class HashTable{
+
     public:
         HashTable();
         ~HashTable();
 
-        void run(string directory, string outputFile);
-        ofstream open_or_die_output(string filename);
-        //inset function into vector
-        //float load factor
-        //find
-        //expand
-        //add, etc
+        void add(string word, int lineNumber, string *linePointer);
+        void remove();
+        list<pair<int, string*>> *searchSensitive(string word, ofstream &outfile);
+        vector<list<pair<int, string*>>> *searchInsensitive(string word, ofstream &outfile);
+        
+
+
 
     private:
 
+        void rehash();
+        template<typename streamtype>
+        void open_or_die(streamtype &stream, string filename);
+        
+
+        struct HashIndex {
+            vector<list<pair<int, string *>>> versions;
+            bool removed;
+            bool empty;
+            string word;
+        };
+        
+        hash<string> hash_function;
+        int size;
+        int capacity;
+        float loadFactor = 0.7;
+        HashIndex *table;
 
 };
 

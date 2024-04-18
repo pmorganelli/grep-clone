@@ -20,11 +20,15 @@
 
 #include <string>
 #include <cctype>
+#include "DirNode.h"
+#include "FSTree.h"
+#include <iostream>
 using namespace std;
 
 string stripNonAlphaNum(string input);
 void traverseDirectory(string directory);
 
-void traverseDirectoryHelper();
 
+void traverseDirectoryHelper(DirNode *root);
+string retrieveParents(DirNode *root);
 #endif 

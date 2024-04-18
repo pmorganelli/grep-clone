@@ -18,7 +18,7 @@ LDFLAGS  = -g3 -O2
 ## At the end, you can delete this comment!
 ## 
 
-gerp: FSTree.o DirNode.o main.o processing.o
+gerp: gerp.o FSTree.o DirNode.o main.o processing.o
 	${CXX} ${CXXFLAGS} $^ -o $@
 
 main.o: main.cpp hashtable.o
@@ -28,10 +28,14 @@ processing.o: processing.cpp processing.h DirNode.o
 	$(CXX) $(CXXFLAGS) -c processing.cpp
 
 hashtable.o: hashtable.cpp hashtable.h
-	$(CXX) $(CXXFLAGS) -c hashtable.o
+	$(CXX) $(CXXFLAGS) -c hashtable.cpp
+
+gerp.o: gerp.cpp gerp.h hashtable.o
+	$(CXX) $(CXXFLAGS) -c gerp.cpp
 
 unit_test: unit_test_driver.o processing.o DirNode.o FSTree.o
 	$(CXX) $(CXXFLAGS) $^
+
 
 ##
 ## Here is a special rule that removes all .o files besides the provided ones 
