@@ -23,39 +23,12 @@ using namespace std;
 
 
 int main(int argc, char *argv[]){
-    if(not (argc == 2)){
+    if(not (argc == 3)){
         std::cerr << "Usage: ./gerp inputDirectory outputFile" << endl;
         return EXIT_FAILURE;
     }
 
     Gerp g;
     g.run(argv[1], argv[2]);
-    
     return 0;
 }
-
-
-
-// /*g
-// * name:      open_or_die_input
-// * purpose:   to open a given input file
-// * arguments: the name of the file as a string
-// * returns:   none
-// * effects:   throws an error if the file fails to open or if the input file
-// *            is empty
-// */
-// ifstream open_or_die_input(string filename){
-//     ifstream inputStream(filename);
-//     if (not(inputStream.is_open())){
-//         string error = "Unable to open file " + filename;
-//         throw runtime_error(error);
-//     }
-
-//     char nextChar = inputStream.peek();
-//     //check if the file is empty
-//     if (nextChar == EOF) {
-//         cout << filename + " is empty and cannot be compressed." << endl;
-//         exit(EXIT_FAILURE);
-//     }
-//     return inputStream;
-// }

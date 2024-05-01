@@ -24,17 +24,17 @@
 */
 string stripNonAlphaNum(string input){
     //remove all LEADING nonalphanumeric chars in the front
-	while((input.length() > 0) and (not isalnum(input.at(0)))){
-		input.erase(0, 1); //replicating pop_front() without any shifting
-	}
+    while((input.length() > 0) and (not isalnum(input.at(0)))){
+        input.erase(0, 1); //replicating pop_front() without any shifting
+    }
 
     //remove all TRAILING nonalphanumeric chars in the back
-	int trailing = input.length() - 1;
-	while((trailing > 0) and (not isalnum(input.at(trailing)))){
-		input.pop_back(); //remove the last char and iterate
-		trailing--;
-	}
-	return input;
+    int trailing = input.length() - 1;
+    while((trailing > 0) and (not isalnum(input.at(trailing)))){
+        input.pop_back(); //remove the last char and iterate
+        trailing--;
+    }
+    return input;
 }
 
 
@@ -55,7 +55,7 @@ void traverseDirectory(string directory){
 
 /*
 * name:      traverseDirectoryHelper
-* purpose:   to traverse the directory given an FSTree and output each file           
+* purpose:   to traverse the directory given an FSTree and output each file
 * arguments: a pointer to the root of the tree to traverse
 * returns:   none; it is void
 * effects:   prints out every file in given directory + subdirectory

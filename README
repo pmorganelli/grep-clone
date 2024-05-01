@@ -3,34 +3,282 @@
 * CS 15
 * README
 * Authors: Peter Morganelli pmorga01 and Brendan Roy broy02
-* April 14th 2024
+* May 1st 2024
 **********************************************************/
 
 **B. Program Purpose:**
     A program that indexes and searches files for strings. Behaves similarly 
-    to the unix grep program, which can search through all the files in a 
-    directory and look for a sequence of characters.
+    to the Unix "grep" program, which can search through all the files in a 
+    directory and look for instances of a given word, either case sensitive
+    or insensitive depending on the user's preference.
 
 **C. Acknowledgements:** 
-
+    Marty Allen for the open_or_die function + hash table lecture slides
+    Lovely TAs for help during design checkoff
 
 **D. Files:** 
-
-
+    README
+        -This file!
+    Makefile
+        -File to build the program and allows the client to
+        run "make gerp" to compile and link and 
+        "./gerp inputDirectory outputFile" to run the executable of the 
+        program with an directory name and output file included as necessary.
+    main.cpp
+        -The main driver file for the gerp program. Creates a gerp object
+        and calls its run function
+    gerp.h
+        -Interface file for the Gerp class. Includes the main run() function
+    gerp.cpp
+        -Implementation file for the gerp class
+    hashtable.h
+        -Interface file for the HashTable class
+    hashtable.cpp
+        -Implementation file for the HashTable class
+    processing.h
+        -Interface file for the stripNonAlphaNum and traverseDirectory
+        functions which were made for part 1 of the project.
+    processing.cpp
+        -Implementation file for the gerp pt. 1 functions mentioned in
+        processing.h
+    unit_tests.h
+        - testing file needed to run unit_tests on functions
+    variedIn.txt
+        - main input file we used to test a variety of situations
+        such as case sensitivity/insensitivity, stripping non alphanumeric
+        chars from queries, redirecting to a new output file, etc.
+    testChangeOutput.txt
+        -testing input file that tests changing the output after testing a few
+        basic queries
+    testSearchSensitive.txt
+       -test input file that tests searchSensitive with some basic queries
+        and some queries that have to be stripped of their non alphanumeric 
+        chars
+    testSearchInsensitive.txt
+        -test input file that tests searchInsensitive with some basic queries
+        and some queries that have to be stripped of their non alphanumeric 
+        chars
+    small-dirs/text-0.txt + small-dirs/text.txt
+        - test files in our own directory called small-dirs. We used text.txt as
+        our main file to test searching on small data. Then, we added text-0.txt
+        to address a specific bug. Both were used as extremely small sample data
+        to test gerp's specific functionalities.
+    
 **E. How to Compile/run:**
      - Compile using
-            make gerp
+            make gerp or make
      - run executable with
             ./gerp DirectoryToIndex OutputFile
 
 **F. Architectural Overview:**
+    We used the provided FSTree and DirNode classes to traverse through the 
+    provided directory and get each file path. We used that path to read from
+    each of the files in the directory/subdirectories.
 
-**G: ADT and Data Structures:** 
+    When reading in from the files, we store each line in "allLines," a massive
+    2D vector (henceforth referred to as the "mother vector," a term coined by 
+    Peter :D) with each index holding the name of the file path and a vector 
+    with all of its lines. If we read in four files, the mother vector would 
+    look something like this:
+    
+             fileOne.txt       fileTwo.txt      fileThree.txt      fileFour.txt
+index 0         line1             line1             line1              line1
+index 1         line2             line2             line2              line2
+index 2 -> n-2  ...               ...               ...                ...
+index n-1       line n            line n            line n             line n
 
-    Interesting Algorithms:
+    For this assignment, we implemented an array-based hash table. Each index 
+    of the table held a struct called HashIndex, which contained a bool telling
+    us if the index was empty or not, a string with the lowercase version of 
+    the word at that index, and two vectors. The first vector, versions, holds
+    every case sensitive 'version' of the word. For the word "apples," the 
+    vector might look something like this after all the files have been read:
+            <apples, Apples, APPLES, AppleS>
+    The other vector stored is a 2D vector called "instances" that holds Word
+    structs. Note that the first index of instances corresponds to the version
+    of the word being stored. For example, instances.at(1) is the vector of 
+    all the 'instances' of the word "Apples" in all the files. Each Word keeps 
+    the first and second index of the mother vector holding each line of the 
+    files. The first index is which file it is in and the second index is the 
+    word's line number. For example, at the HashIndex storing "apples," the
+    nth index of instances corresponds to the nth file that contains any
+    version of the word, while the second index of each of those corresponds to
+    the specific line numbers the instance of the word appears on in that file.
+    
+    To sum up our hash table, we use an array of HashIndex structs, each of
+    which contain all the case sensitive versions and instances of a single 
+    word from all the files we read in. We store their respective lines by 
+    using ints that correspond to the indices of the mother vector, which holds
+    every single line from every single file.
+    
+    
+**G: ADT, Data Structures, and Algorithms:** 
+    **Primary Data Structures** used: Vectors, Pairs, and Structs
+    **The ADT we are creating:** a Hash Table
 
+    **Hash Tables:**
+    We chose to implement this assignment with a hash table because we needed
+    fast access time to search for the queried words. A hash table uses a 
+    special function called a hash function to generate a unique key for every
+    value (in this case, Words). That key value is then used as the index of
+    the word in the table. Since the hash function is constant time, inserting
+    and accessing from the hash table is also constant because once we have the
+    key we can access the value. However, the array that is our hash table does
+    have a certain maximum capacity. Let's say that capacity is 100. The hash
+    function will produce integers greater than 100, so we will need to use the
+    modulo operator on it in order to store it at an actual index of the array.
+    For example, hashing the word "hello" might give us the number 9294, but
+    this would be inserted into index 94 after we mod by 100. This fact brings
+    us to two other properties of hash tables: collisions and rehashing. We
+    have already established that the capacity of our example hash table is 100,
+    which means that we can only store 100 unique words. However, as the number
+    of stored words increases, the greater the likelihood that two words will
+    hash to the same index. This is called a collision. To get around this, we
+    used a method called linear probing, which looks for the next empty index,
+    and puts the word there. When searching for a word, the process works the
+    same. If the word is not at the index that its hash function says it is, 
+    then we continue incrementing the index until we find the word. Collisions
+    present a problem for hash tables because they diminish their instant access
+    time benefit. This means we must minimize the amount of collisions that
+    occur. We know that the more words in our hash table, the more likely a
+    collision is, so we must establish a certain threshold such that the table
+    is never more than a certain percentage full. This percentage is called the
+    load factor, and people smarter than us have found that a load factor of
+    0.7 to 0.75 is optimal. Our hash table uses a load factor of 0.7. This means
+    that whenever the amount of words in the hash table divided by the capacity
+    of the table is greater than or equal to 0.7, we need to rehash the table.
+    In our example, once we add 70 words to the table, it will be rehashed. 
+    Rehashing the table consists of creating a new array with double the 
+    capacity of the current one, then reapplying the hash function to every
+    non-empty index of the current array and storing the words in the new array.
+    By re-hashing every word, we ensure that the access time is constant. This
+    is important because our search algorithms rely on 'modding' the hash result
+    by the capacity, so when the capacity changes, the index of each word must
+    also be changed.
+
+    **Vectors:**
+    A lot of our implementation of a hash table relied on vectors and our usage
+    of a 2D vector. We decided that vectors were useful for storing objects
+    in our hash table mainly because of the constant time access for searching
+    using vector's .at() and .back() functionality, (which we used very 
+    frequently) and its constant time for adding using .push_back(). Vectors
+    are also very useful for scalability, which means they are particularly
+    fast and useful as the data becomes larger and larger, which we were
+    expecting for each of the Gutenberg directories. Vectors can also resize
+    and grow easily, which made adding and removing elements easier. 
+
+    **Pairs:**
+    An important data structure we used to aid in creating a Hash Table
+    were Pairs. Since we used a 2D vector, using pairs of ints
+    (pair<int, int>) were particularly useful to locate the row and column of
+    the data we are trying to access. Additionally, when making our vector
+    allLines, we needed a way to store both the file path, and all of the lines
+    within the file. Pairs were particularly useful for this job because it is
+    a small data structure that for us allowed us to make 
+    a vector<pair<string, vector<string>>>. In this example, our pair of
+    a string and vector of strings allowed us to hold the file path (string)
+    and all the lines stored within that file (vector<string>). Therefore,
+    using a pair to associate the filepaths with their respective lines made
+    our job easier and thus was a good choice to use for this job.
+
+    **Structs:**
+    Finally, we used Structs to create our HashIndex and a struct for 
+    relevant information about a given Word. By creating a HashIndex struct,
+    we were able to easily access the versions (important for case insensitive)
+    and instances of a given word. By using a struct for Words, we can store
+    its "index1" and "index2" which are identifying factors used in our 2D 
+    vector. More generally, structs allowed us to access this information
+    easily and group several variables into one place. 
+
+    **Interesting Algorithms:**
+    To build our hash table, we needed a way to add words to it. Our add()
+    function is likely our most complicated due to the nature of the project in
+    terms of case sensitivity. When adding a word, the first thing our program
+    did was turn the word into its lowercase version. Then, we inputted that
+    version into the hash function to generate its key. Next, we checked if that
+    index of our array was empty or not. If it was not empty, then we probed 
+    linearly until we either found an empty index or the index already holding
+    the word that we wanted to add. If the resulting index was empty, then we 
+    knew that no version of that word had been added to the table yet, so we 
+    increase "size" by 1 and add the word to the table. If the index was not
+    empty, then we needed to determine if that index already had the inputted 
+    version of the word (ie does the table already store this specific 
+    capitalization). We then ran our contains() function to determine what the
+    value of this Word's "seen" variable would be. (This was a straightforward 
+    algorithm that checked if the line number and file path of the inputted word
+    already stored another instance of the inputted word.) If we already had the
+    version of the inputted word, then we simply added a new Word to the back
+    of its vector in "instances." If we did not already have the version of the
+    inputted word, then we pushed a new vector onto both "versions" and 
+    "instances" and added a new Word to the back of the vector in the back of
+    "instances."
+
+    The most important algorithms we had to implement were for 
+    searchInsensitive and searchSensitive. For searchInsensitive, the goal
+    was to find all instances of a given word, ignoring capitalization. Since we
+    utilized the lowercase version of each word to generate the key for our 
+    hash table, the first thing we did was generate the lowercase version of the
+    inputted word. That gave us access to the HashIndex struct of our word to
+    search for. As described above, that struct held a vector of all the word's
+    'versions' (different capitlizations) and their corresponding 'instances'
+    (all the file names and line numbers of each version). For case insensitve
+    search, we needed to print every line in the "instances" vector that had not
+    already been printed. We used a "seen" variable to keep track of this fact
+    in the Word struct (see above for details). Thus, to output all instances of
+    a word while ignoring capitilization, we simply iterated through the
+    instances vector, printing out every line whose "seen" vector was false.
+    
+    For searchSensitive, it was the same idea, except we had to only print the 
+    version of the word that had the same capitalization of the word we were 
+    given. That meant finding which 'version' of the word we were looking for
+    in our "versions" vector, then printing out all of its 'instances' in our
+    "instances" vector. Note that "instances" is 2D, so each version of the word
+    has its own vector of all the word's instances. We also had to make sure the
+    Word wasn't "seen" using a boolean, so we weren't printing out the same line
+    that had multiple instances of the word twice.
+        
 **H. Testing:**
-
+    For testing, we used a variety of input files along with unit_tests.h
+    to test functions along the way. For part 1 of the project, we tested
+    stripNonAlphaNum() and traverseDirectory() thoroughly in unit_tests.h.
+    Unit testing for part 2 was particularly useful in the early stages of the 
+    project and helped us test adding words to our hash table, processing files,
+    and testing basic searching before we moved on to larger-scale and more 
+    complex inputs.
+    
+    To test on a larger scale, we pulled the proj-gerp-test-dirs into our own 
+    directory called "test-dirs" which included tinyData and each Gutenberg
+    file. When testing on larger outputs, edge cases, and autograder
+    checks, this is the directory we would refer to. This also allowed us to
+    pass in a directory name like "test-dirs/smallGutenberg" to specifically
+    test our memory and time usage of our program in the smallGutenberg
+    directory. Additionally, we had a smaller-scale testing directory called
+    "small-dirs" which consisted of our own files and allowed us to recreate
+    bugs we discovered when testing on larger outputs on a smaller scale.
+    For example, we had a bug where two files in smallGutenberg, "385435" and 
+    "385435-0" (I don't remember the name exactly but it was something like
+    this) had near-identical file names and file contents. Namely, these two
+    files had identical lines on the same line number, so when we would search
+    for a word, it would only print out its instance in one file but not the
+    other. We approached this problem by recreating the scenario on a smaller
+    scale, and did this through first naming two files with similar names
+    "test.txt" and "test-0.txt", as we were unsure if that was the root of
+    the problem. We then gave the two files near-identical contents and 
+    searched for words that appeared on the same lines in both files, and
+    through this process we were able to narrow down the issue and ultimately
+    fix how our add function was operating. The bug ended up being how we
+    weren't checking to see if the word was coming from the same file, but
+    the important part here is how we replicated the problem on a smaller scale
+    to narrow down our debugging and save our sanity. There were also
+    several input files we submitted for testing, such as varietyInput.txt,
+    testChangeOutput, testSearchInsensitive, and testSearchSensitive. 
+    These files tested a combination/variety of inputs, changing our output
+    file using the @f command, testing searching insensitively, and testing
+    searching sensitively, respectively. We also used our Makefile to run
+    the command "make diff" which ran our program and the reference program
+    on the same input, sorted their outputs, and compared the differences.
+    This saved us a ton of time with testing and allowed us to test against
+    the reference quickly and efficiently.
 
 **I. Time Spent Log:** 
-4 hours
+20 hours

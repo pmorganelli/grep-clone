@@ -8,17 +8,7 @@ CXX      = clang++
 CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
 LDFLAGS  = -g3 -O2
 
-
-## 
-## Build up your Makefile in a similar manner as for Zap. Feel free 
-## to use that Makefile to guide you! Note, you do NOT need rules for
-## FSTree.o and DirNode.o as those (pre-compiled) object files are 
-## provided to you.
-## 
-## At the end, you can delete this comment!
-## 
-
-gerp: gerp.o FSTree.o DirNode.o main.o processing.o
+gerp: gerp.o FSTree.o DirNode.o main.o processing.o hashtable.o
 	${CXX} ${CXXFLAGS} $^ -o $@
 
 main.o: main.cpp hashtable.o
@@ -33,10 +23,18 @@ hashtable.o: hashtable.cpp hashtable.h
 gerp.o: gerp.cpp gerp.h hashtable.o
 	$(CXX) $(CXXFLAGS) -c gerp.cpp
 
-unit_test: unit_test_driver.o processing.o DirNode.o FSTree.o
+unit_test: unit_test_driver.o processing.o DirNode.o FSTree.o gerp.o hashtable.o
 	$(CXX) $(CXXFLAGS) $^
 
-
+diff:
+	make gerp
+	./gerp test-dirs/smallGutenberg my_out.txt < variedIn.txt > myOut.txt
+	./the_gerp test-dirs/smallGutenberg ref_out.txt < variedIn.txt > refOut.txt
+	sort my_out.txt > my_sorted.txt
+	sort ref_out.txt > ref_sorted.txt
+	diff my_sorted.txt ref_sorted.txt
+	diff myOut.txt refOut.txt
+	
 ##
 ## Here is a special rule that removes all .o files besides the provided ones 
 ## (DirNode.o and FSTree.o), all temporary files (ending with ~), and 
