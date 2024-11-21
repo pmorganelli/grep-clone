@@ -39,7 +39,7 @@ class Gerp{
         
     private:
         HashTable table;
-        void indexDirectory(string directory);
+        bool indexDirectory(string directory);
         void processFile(string filePath);
         void indexDirectoryHelper(DirNode *root);
         string stripNonAlphaNum(string input);

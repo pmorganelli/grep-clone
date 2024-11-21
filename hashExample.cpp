@@ -19,12 +19,12 @@ const int ARRAYSIZE = 7;
 int main() {
         //setup
         string input[ARRAYSIZE] = {"penguins", 
-				   "harpseals", 
-				   "polarbears", 
-				   "seagulls", 
-				   "walruses",
-				   "articfoxes",
-				   "narwhals"};
+                    "harpseals", 
+                    "polarbears", 
+                    "seagulls", 
+                    "walruses",
+                    "articfoxes",
+                    "narwhals"};
 
         string animal[ARRAYSIZE]; // initalized to all "-1"
         for (int i = 0; i < ARRAYSIZE; i++) {
@@ -51,9 +51,9 @@ int main() {
                 animal[index] = input[i];
             } else {
                 cout << "unable to insert " << input[i] << " at " << index
-                     << " -- collision with " << animal[index] << endl;
-	    }
+                        << " -- collision with " << animal[index] << endl;
         }
+    }
 
         cout << endl;
 

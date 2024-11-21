@@ -37,6 +37,25 @@ HashTable::~HashTable(){
     delete [] table;
 }
 
+/*
+* name:      getIndex
+* purpose:   to get the index of the word in our hash table
+* arguments: string with the word
+* returns:   int that is the index that the word hashes to
+* effects:   none
+*/
+int HashTable::getIndex(string word){
+    string lowerWord; // get lowercase version of the word
+    for (char c : word) lowerWord.push_back(tolower(c));
+    size_t idx = hashFunction(lowerWord) % capacity;
+    if (not table[idx].empty){ //get the next valid index (probe linearly -_-)
+        while (not table[idx].empty and table[idx].word != lowerWord){
+            idx = (idx + 1) % capacity;
+        } 
+    }
+    return idx;
+}
+
 
 /*
 * name:      add 
@@ -52,35 +71,29 @@ void HashTable::add(string word, int indexOne, int indexTwo){
     if ((double)size / (double)capacity > loadFactor)  rehash();
     string lowerWord;
     for (char c : word) lowerWord.push_back(tolower(c));
-    size_t idx = hashFunction(lowerWord) % capacity;
-    if (not table[idx].empty){ //get the next valid index (probe linearly -_-)
-        while (not table[idx].empty and table[idx].word != lowerWord){
-            idx = (idx + 1) % capacity;
-        } 
-    }
-    if (table[idx].empty) size++;
+    int idx = getIndex(word); // get the index of the word
+    if (table[idx].empty) size++; // increment size if needed
     bool hasWord = false;
     int versionNum;
     HashIndex *curr = &table[idx];
     curr->empty = false;
     curr->word = lowerWord;
     int currSize = curr->versions.size();
-    for (int i = 0; i < currSize; i++){
+    for (int i = 0; i < currSize; i++){ // see which version to add to
         if (curr->versions.at(i) == word){
             hasWord = true;
             versionNum = i;
         }
     }
     bool hasLine = contains(indexOne, indexTwo, *curr);
-    if (not hasWord) {   
+    if (not hasWord) { // add new version of the word
         curr->versions.push_back(word);
         curr->instances.push_back(vector<Word>());
         curr->instances.back().push_back(Word(hasLine, indexOne, indexTwo));
-    } else {
-            if (curr->instances.at(versionNum).back().index2 == indexTwo 
-                and curr->instances.at(versionNum).back().index1 == indexOne){
-                return;
-            }
+    } else { // add to the back of existing version
+        if (curr->instances.at(versionNum).back().index2 == indexTwo 
+            and curr->instances.at(versionNum).back().index1 == indexOne)
+            return;
         curr->instances.at(versionNum).push_back
                                       (Word(hasLine, indexOne, indexTwo));
     }  
@@ -96,8 +109,8 @@ void HashTable::add(string word, int indexOne, int indexTwo){
 * effects:   none
 */
 bool HashTable::contains(int idx, int idx2, HashIndex &curr){
-    int size1 = curr.instances.size();
-    for (int i = 0; i < size1; i++){
+    // check if any version of the word appears on the line we are adding
+    for (size_t i = 0; i < curr.instances.size(); i++){
         if (curr.instances.at(i).size() > 0){
             int index1 = curr.instances.at(i).back().index1;
             int index2 = curr.instances.at(i).back().index2;
@@ -119,15 +132,16 @@ bool HashTable::contains(int idx, int idx2, HashIndex &curr){
 void HashTable::rehash(){
     int newTableSize = capacity * 2;
     HashIndex *newTable = new HashIndex[newTableSize];
-
     size_t idx = 0;
-    for (int i = 0; i < capacity; i++){
+
+    for (int i = 0; i < capacity; i++){ // rehash every nonempty index
         if (not table[i].empty){
             idx = hashFunction(table[i].word) % newTableSize;
         }
         while (not newTable[idx].empty) idx = (idx + 1) % newTableSize;
         newTable[idx] = table[i];
     }
+    // set table to the new table and deallocate previously used memory
     delete [] table;
     table = newTable;
     capacity = newTableSize;
@@ -141,31 +155,21 @@ void HashTable::rehash(){
 * effects:   prints to the given output file based on what was found
 */
 void HashTable::searchSensitive(string word, ostream &outfile){
-    if (word == "") {
-        outfile << " Not Found.";
+    string lowerWord; // get lowercase version of the word
+    for (char c : word) lowerWord.push_back(tolower(c));
+    int idx = getIndex(lowerWord);
+    int versionNum = -1;
+    for (size_t i = 0; i < table[idx].versions.size(); i++){
+        if (word == table[idx].versions.at(i)){
+            versionNum = i; // get the specific version's index
+        }
+    }
+    if (versionNum == -1 or word == "") { // word doesn't exist
+        outfile << word << " Not Found. Try with @insensitive or @i." << endl; 
         return;
     }
-    string lowerWord;
-    for (char c : word) lowerWord.push_back(tolower(c));
-    size_t idx = hashFunction(lowerWord) % capacity;
-    if (table[idx].word != lowerWord){
-        while (not table[idx].empty and not (table[idx].word == lowerWord)) {
-            idx = (idx + 1) % capacity;  
-        }
-    }
-    int versionNum = -1;
-    int localSize = table[idx].versions.size();
-    for (int i = 0; i < localSize; i++){
-        if (word == table[idx].versions.at(i)){
-            versionNum = i;
-        }
-    }
-    if (versionNum == -1) {outfile << word << 
-    " Not Found. Try with @insensitive or @i." << endl; return;}
-
-    if (table[idx].word == lowerWord) {
-        int numAppearances = table[idx].instances.at(versionNum).size();
-        for (int i = 0; i < numAppearances; i++){
+    if (table[idx].word == lowerWord) { // print all lines of the word
+        for (size_t i = 0; i < table[idx].instances.at(versionNum).size(); i++){
             int index1 = table[idx].instances.at(versionNum).at(i).index1;
             int index2 = table[idx].instances.at(versionNum).at(i).index2;
             outfile << allLines.at(index1).first << ":" <<
@@ -184,21 +188,16 @@ void HashTable::searchSensitive(string word, ostream &outfile){
 void HashTable::searchInsensitive(string word, ostream &ofile){
     string lowerWord;
     for (char c : word) lowerWord.push_back(tolower(c));
-    size_t idx = hashFunction(lowerWord) % capacity;
-    if (word == "" or table[idx].empty){
+    int idx = getIndex(word);
+    if (word == "" or table[idx].empty){ // word is not in the table
         ofile << word << " Not Found." << endl;
         return;
     }
-    if (table[idx].word != lowerWord){
-        while (not table[idx].empty and not (table[idx].word == lowerWord)) {
-            idx = (idx + 1) % capacity; 
-        }
-    }
     bool hasWord = false;
-    if (table[idx].word == lowerWord) {
+    if (table[idx].word == lowerWord) { // print out each version of the word
         hasWord = true;
-        for (int i = 0; i < (int)table[idx].instances.size(); i++){
-            for (int j = 0; j < (int)table[idx].instances.at(i).size(); j++){
+        for (size_t i = 0; i < table[idx].instances.size(); i++){
+            for (size_t j = 0; j < table[idx].instances.at(i).size(); j++){
                 int idx1 = table[idx].instances.at(i).at(j).index1;
                 int idx2 = table[idx].instances.at(i).at(j).index2;
                 string path =  (allLines.at(idx1).first) + ":"; 
@@ -208,7 +207,7 @@ void HashTable::searchInsensitive(string word, ostream &ofile){
             }
         }
     }
-    if (not hasWord) ofile << word << " Not Found." << endl;
+    if (not hasWord) ofile << word << " Not Found." << endl; // word not found
 }
 
 /*
@@ -220,22 +219,23 @@ void HashTable::searchInsensitive(string word, ostream &ofile){
 * effects:   adds to allLines (our 2D vector)
 */
 pair<int, int>HashTable::addLine(string line, int lineNum, string filePath){
-    int allLinesSize = allLines.size();
     bool hasFile = false;
-    string newString = to_string(lineNum) + ": " +  line;
+
+    // add line number to file path 
+    string newString = to_string(lineNum) + ": " +  line; 
     int versionNum = -1;
-    for (int i = allLinesSize; i > 0 and not hasFile; i--){
+    // get the filepath that we will add to
+    for (int i = allLines.size(); i > 0 and not hasFile; i--){
         if (allLines.at(i - 1).first == filePath){
             hasFile = true;
             versionNum = i - 1;
         }
     }
-
-    if (hasFile){  
+    if (hasFile){  // add line to back of filepath index
         allLines.at(versionNum).second.push_back(newString);
         return (pair<int, int>(versionNum, 
                 allLines.at(versionNum).second.size() - 1));
-    } else {
+    } else { // we have a new file. add new vector to allLines
         allLines.push_back(pair<string, vector<string>>());
         allLines.back().first = filePath;
         allLines.back().second.push_back(newString);

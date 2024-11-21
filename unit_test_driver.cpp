@@ -25,8 +25,8 @@ int main(int argc, char **argv) {
 
     /* will be filled in by the unit_test script */
     std::map<std::string, FnPtr> tests {
-	{ "testStripNonAlphaNum", testStripNonAlphaNum },
-	{ "testDirectoryTraversal", testDirectoryTraversal },
+    { "testStripNonAlphaNum", testStripNonAlphaNum },
+    { "testDirectoryTraversal", testDirectoryTraversal },
 
     };
 

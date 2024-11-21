@@ -28,54 +28,55 @@ using namespace std;
 */
 void Gerp::run(string directory, string outputFile){
     ofstream outputFileStream;
-    open_or_die(outputFileStream, outputFile);
-    indexDirectory(directory);
+    open_or_die(outputFileStream, outputFile); // open output stream
+    if (not indexDirectory(directory)) return;  // index the directory
     string query;
     string word;
     cout << "Query? ";
-    while (cin >> query){
-        if ((query == "@q") or (query == "@quit")){
+    while (cin >> query){ // continue accepting query
+        if ((query == "@q") or (query == "@quit")){ // quit query
             cout << "Goodbye! Thank you and have a nice day." << endl;
             return;
-        }
-        else if (query == "@i" or query == "@insensitive"){
-            cin >> word;
+        } else if (query == "@i" or query == "@insensitive"){
+            cin >> word; // get word to search for
             string strippedWord = stripNonAlphaNum(word);
             table.searchInsensitive(strippedWord, outputFileStream);
-        }
-        else if (query == "@f"){
-            cin >> word; //word functions as the name of the output file here
-            string strippedWord = stripNonAlphaNum(word);
-            
-            //close current output stream and open a new one
-            outputFileStream.close();
-            open_or_die(outputFileStream, strippedWord);
-        }
-        else {
+        } else if (query == "@f"){ // switch output file
+            cin >> word; // word functions as the name of the output file here
+            outputFileStream.close(); // close and open the new file stream
+            open_or_die(outputFileStream, word);
+        } else {
             string strippedWord = stripNonAlphaNum(query);
             table.searchSensitive(strippedWord, outputFileStream);
-
         }
         cout << "Query? ";
     }
     cout << "Goodbye! Thank you and have a nice day." << endl;
 }
 
+
+/*
+* name:      processFile
+* purpose:   to read the inputted file and add the contents to hash table
+* arguments: name of the file to be read
+* returns:   nothing; it is void
+* effects:   adds the lines to the big vector and each word to the hash table
+*/
 void Gerp::processFile(string filePath){
     ifstream infile;
-    open_or_die(infile, filePath);
-
-    int lineCount = 1;
-    while (infile.peek() != -1){
+    open_or_die(infile, filePath); // open the file
+    int lineCount = 1; // this is the line number
+    while (infile.peek() != -1){ // while the file has contents
         string line;
         getline(infile, line);
         istringstream lineStream(line);
-        pair<int, int> s = table.addLine(line, lineCount, filePath);
 
+        // this gets us the first and second index of the allLines vector
+        pair<int, int> indices = table.addLine(line, lineCount, filePath);
         string curr;
-        while (lineStream >> curr){
+        while (lineStream >> curr){ // read each word in the line
             curr = stripNonAlphaNum(curr);
-            table.add(curr, s.first, s.second);            
+            table.add(curr, indices.first, indices.second);            
         }
         lineCount++;
     }
@@ -104,13 +105,20 @@ void Gerp::open_or_die(streamtype &stream, string filename){
 * name: indexDirectory      
 * purpose: to take the name of a directory and input contents into the HashTable
 * arguments: string of the name of the directory to index
-* returns: nothing; is void
+* returns: bool saying if the directory exists or not
 * effects:   
 */
-void Gerp::indexDirectory(string directory){
-    FSTree tree(directory);
-    DirNode *root = tree.getRoot();
-    indexDirectoryHelper(root);
+bool Gerp::indexDirectory(string directory){
+    try { // try to open make the directory with the given name
+        FSTree tree(directory);
+        DirNode *root = tree.getRoot();
+        indexDirectoryHelper(root);
+        return true;
+    } catch (runtime_error){ // the directory name is invalid
+        cerr << "Could not build index, reason:" << endl << "Directory \"" <<
+                directory << "\" not found: could not build tree" << endl;
+        return false;
+    }
 }
 
 
@@ -128,11 +136,10 @@ void Gerp::indexDirectoryHelper(DirNode *root){
         for(int i = 0; i < numFilesCount; i++){
             string filePath = retrieveParents(root) + "/" 
                               + root->getFile(i);
-            
             processFile(filePath);
         }
     }
-    if (root->hasSubDir()){
+    if (root->hasSubDir()){ // traverse each subdirectory
         for(int i = 0; i < root->numSubDirs(); i++){
             indexDirectoryHelper(root->getSubDir(i));
         }

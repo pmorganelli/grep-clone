@@ -45,7 +45,7 @@ class HashTable{
 
         bool contains(int idx, int idx2, HashIndex &curr);
         void rehash();
-
+        int getIndex(string word);
         HashIndex *table;
         hash<string> hashFunction;
         vector<pair<string, vector<string>>> allLines;
